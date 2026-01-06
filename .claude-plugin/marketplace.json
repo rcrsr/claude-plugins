@@ -1,0 +1,16 @@
+{
+  "name": "rcrsr",
+  "owner": {
+    "name": "rcrsr"
+  },
+  "plugins": [
+    {
+      "name": "repmat",
+      "source": {
+        "source": "github",
+        "repo": "rcrsr/repmat"
+      },
+      "description": "Turn software development tasks into reliable AI agents"
+    }
+  ]
+}
