@@ -1,6 +1,6 @@
-# rcrsr Claude Plugins
+# Claude Plugin Marketplace
 
-A marketplace of Claude Code plugins.
+Claude Code marketplace for rcrsr plugins.
 
 ## Installation
 
