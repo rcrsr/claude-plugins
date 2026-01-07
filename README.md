@@ -19,3 +19,4 @@ Claude Code marketplace for rcrsr plugins.
 |--------|-------------|
 | [repmat](https://github.com/rcrsr/repmat) | Turn software development tasks into reliable Claude Code workflows |
 | [snoop](https://github.com/rcrsr/snoop) | Capture Claude Code single-turn transcripts for debugging and review |
+| policies | Auto-fetch policies for subagents via PreToolUse hook |

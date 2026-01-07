@@ -23,6 +23,14 @@
         "url": "https://github.com/rcrsr/snoop.git"
       },
       "description": "Captures Claude Code single-turn transcripts for debugging and review"
+    },
+    {
+      "name": "policies",
+      "source": {
+        "source": "local",
+        "path": "./policies"
+      },
+      "description": "Auto-fetch policies for subagents via PreToolUse hook"
     }
   ]
 }
