@@ -9,7 +9,6 @@ Claude Code marketplace for rcrsr plugins.
 /plugin marketplace add https://github.com/rcrsr/claude-plugins.git
 
 # Install a plugin
-/plugin install repmat@rcrsr
 /plugin install snoop@rcrsr
 ```
 
@@ -19,4 +18,4 @@ Claude Code marketplace for rcrsr plugins.
 |--------|-------------|
 | [repmat](https://github.com/rcrsr/repmat) | Turn software development tasks into reliable Claude Code workflows |
 | [snoop](https://github.com/rcrsr/snoop) | Capture Claude Code single-turn transcripts for debugging and review |
-| policies | Auto-fetch policies for subagents via PreToolUse hook |
+| [policies](./policies) | Plugin wrapper for mcp-policy-server |
