@@ -1,7 +1,11 @@
 {
   "name": "rcrsr",
   "owner": {
-    "name": "rcrsr"
+    "name": "Andre Bremer",
+    "email": "andre@gxpsoft.co"
+  },
+  "metadata": {
+    "description": "Claude Code plugins by rcrsr"
   },
   "plugins": [
     {
@@ -10,7 +14,15 @@
         "source": "github",
         "repo": "rcrsr/repmat"
       },
-      "description": "Turn software development tasks into reliable AI agents"
+      "description": "Turn your software development tasks into reliable Claude Code workflows"
+    },
+    {
+      "name": "snoop",
+      "source": {
+        "source": "github",
+        "repo": "rcrsr/snoop"
+      },
+      "description": "Captures Claude Code single-turn transcripts for debugging and review"
     }
   ]
 }
