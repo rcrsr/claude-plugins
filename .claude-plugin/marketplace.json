@@ -26,10 +26,7 @@
     },
     {
       "name": "policies",
-      "source": {
-        "source": "local",
-        "path": "./policies"
-      },
+      "source": "./policies",
       "description": "Auto-fetch policies for subagents via PreToolUse hook"
     }
   ]
