@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "npx -p @rcrsr/mcp-policy-server policy-hook --config \"$CLAUDE_PROJECT_DIR/.claude/policies/*.md\""
+            "command": "npx -p @rcrsr/mcp-policy-server policy-fetch --hook --config \"{\\\"files\\\": [\\\"$CLAUDE_PROJECT_DIR/.claude/policies/*.md\\\", \\\"${CLAUDE_PLUGIN_ROOT}/policies/*.md\\\"]}\""
           }
         ]
       }
