@@ -11,16 +11,16 @@
     {
       "name": "repmat",
       "source": {
-        "source": "github",
-        "repo": "rcrsr/repmat"
+        "source": "git",
+        "url": "https://github.com/rcrsr/repmat.git"
       },
       "description": "Turn your software development tasks into reliable Claude Code workflows"
     },
     {
       "name": "snoop",
       "source": {
-        "source": "github",
-        "repo": "rcrsr/snoop"
+        "source": "git",
+        "url": "https://github.com/rcrsr/snoop.git"
       },
       "description": "Captures Claude Code single-turn transcripts for debugging and review"
     }

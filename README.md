@@ -6,14 +6,16 @@ Claude Code marketplace for rcrsr plugins.
 
 ```bash
 # Add the marketplace
-/plugin marketplace add rcrsr/claude-plugins
+/plugin marketplace add https://github.com/rcrsr/claude-plugins.git
 
 # Install a plugin
 /plugin install repmat@rcrsr
+/plugin install snoop@rcrsr
 ```
 
 ## Available Plugins
 
 | Plugin | Description |
 |--------|-------------|
-| [repmat](https://github.com/rcrsr/repmat) | Turn software development tasks into reliable AI agents |
+| [repmat](https://github.com/rcrsr/repmat) | Turn software development tasks into reliable Claude Code workflows |
+| [snoop](https://github.com/rcrsr/snoop) | Capture Claude Code single-turn transcripts for debugging and review |
