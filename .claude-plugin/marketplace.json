@@ -10,13 +10,7 @@
     {
       "name": "policies",
       "source": "./policies",
-      "version": "1.0.1",
-      "description": "Auto-fetch policies for subagents via PreToolUse hook",
-      "author": {
-        "name": "Andre Bremer",
-        "email": "andre@gxpsoft.co",
-        "url": "https://andrebremer.com"
-      }     
+      "description": "Auto-fetch policies for subagents via PreToolUse hook"
     },
     {
       "name": "snoop",
