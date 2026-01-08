@@ -1,11 +1,10 @@
 {
   "name": "rcrsr",
   "owner": {
-    "name": "Andre Bremer",
-    "email": "andre@gxpsoft.co"
+    "name": "Andre Bremer"
   },
   "metadata": {
-    "description": "Claude Code plugins by rcrsr"
+    "description": "Claude Code plugins by Andre Bremer"
   },
   "plugins": [
     {
@@ -27,7 +26,13 @@
     {
       "name": "policies",
       "source": "./policies",
-      "description": "Auto-fetch policies for subagents via PreToolUse hook"
+      "version": "1.0.0",
+      "description": "Auto-fetch policies for subagents via PreToolUse hook",
+      "author": {
+        "name": "Andre Bremer",
+        "email": "andre@gxpsoft.co",
+        "url": "https://andrebremer.com"
+      }     
     }
   ]
 }
