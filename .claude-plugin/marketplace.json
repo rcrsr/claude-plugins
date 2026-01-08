@@ -8,12 +8,15 @@
   },
   "plugins": [
     {
-      "name": "repmat",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/rcrsr/repmat.git"
-      },
-      "description": "Turn your software development tasks into reliable Claude Code workflows"
+      "name": "policies",
+      "source": "./policies",
+      "version": "1.0.1",
+      "description": "Auto-fetch policies for subagents via PreToolUse hook",
+      "author": {
+        "name": "Andre Bremer",
+        "email": "andre@gxpsoft.co",
+        "url": "https://andrebremer.com"
+      }     
     },
     {
       "name": "snoop",
@@ -24,15 +27,12 @@
       "description": "Captures Claude Code single-turn transcripts for debugging and review"
     },
     {
-      "name": "policies",
-      "source": "./policies",
-      "version": "1.0.0",
-      "description": "Auto-fetch policies for subagents via PreToolUse hook",
-      "author": {
-        "name": "Andre Bremer",
-        "email": "andre@gxpsoft.co",
-        "url": "https://andrebremer.com"
-      }     
+      "name": "repmat",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/rcrsr/repmat.git"
+      },
+      "description": "*EXPERIMENTAL* Turn your software development tasks into reliable Claude Code workflows"
     }
   ]
 }
