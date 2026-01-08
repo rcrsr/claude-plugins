@@ -219,7 +219,7 @@ Apply retry logic per §API.3 before returning errors.
 
 **Rules:**
 
-1. Reference the most specific section (§API.3.2 not §API)
+1. Reference the most specific section (`§API.3.2` not `§API`)
 2. Verify the referenced section exists before committing
 3. Never duplicate content across policies—reference instead
 
