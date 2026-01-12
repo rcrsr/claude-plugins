@@ -21,10 +21,10 @@
       "description": "Captures Claude Code single-turn transcripts for debugging and review"
     },
     {
-      "name": "checker",
+      "name": "checkmate",
       "source": {
         "source": "url",
-        "url": "https://github.com/rcrsr/checker.git"
+        "url": "https://github.com/rcrsr/checkmate.git"
       },
       "description": "Automated code quality checks on file edits with configurable linters and formatters"
     }

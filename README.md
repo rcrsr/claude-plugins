@@ -14,14 +14,14 @@ Plugins that make Claude Code more reliable. Catch errors early, debug failures,
 
 ## Available Plugins
 
-### [checker](https://github.com/rcrsr/checker)
+### [checkmate](https://github.com/rcrsr/checkmate)
 
 **Automated code quality checks on every edit.**
 
-Runs your linters, formatters, and type checkers after every file change. Errors block until fixed. Supports monorepos with different tools per directory. Zero-config start with `/checker:create`.
+Runs your linters, formatters, and type checkers after every edit. Catches errors before they compound. Zero configuration needed to get started. Discovers and configures your tools automatically within seconds. Perfect for monorepos with diverse toolchains.
 
 ```bash
-/plugin install checker@rcrsr
+/plugin install checkmate@rcrsr
 ```
 
 ---
