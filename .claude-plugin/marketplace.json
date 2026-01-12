@@ -18,7 +18,7 @@
         "source": "url",
         "url": "https://github.com/rcrsr/snoop.git"
       },
-      "description": "Captures Claude Code single-turn transcripts for debugging and review"
+      "description": "Captures Claude Code run transcripts between user prompts for debugging and review"
     },
     {
       "name": "checkmate",
