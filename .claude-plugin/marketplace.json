@@ -21,12 +21,12 @@
       "description": "Captures Claude Code single-turn transcripts for debugging and review"
     },
     {
-      "name": "repmat",
+      "name": "checker",
       "source": {
         "source": "url",
-        "url": "https://github.com/rcrsr/repmat.git"
+        "url": "https://github.com/rcrsr/checker.git"
       },
-      "description": "*EXPERIMENTAL* Turn your software development tasks into reliable Claude Code workflows"
+      "description": "Automated code quality checks on file edits with configurable linters and formatters"
     }
   ]
 }
