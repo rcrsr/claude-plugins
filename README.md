@@ -1,4 +1,4 @@
-# rcrsr Plugin Marketplace
+# Claude Code Plugins
 
 Plugins that make Claude Code more reliable. Catch errors early, debug failures, enforce standards.
 
