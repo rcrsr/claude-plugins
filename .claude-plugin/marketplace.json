@@ -27,6 +27,11 @@
         "url": "https://github.com/rcrsr/checkmate.git"
       },
       "description": "Automated code quality checks on file edits with configurable linters and formatters"
+    },
+    {
+      "name": "velocity",
+      "source": "./velocity",
+      "description": "Velocity and quality assessment for development teams"
     }
   ]
 }

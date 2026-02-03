@@ -1,0 +1,9 @@
+{
+  "name": "velocity",
+  "description": "Executive velocity and quality assessment for development teams",
+  "version": "1.0.0",
+  "author": {
+    "name": "Andre Bremer",
+    "url": "https://andrebremer.com"
+  }
+}
