@@ -41,15 +41,23 @@ Synthesize the most critical finding in 2-3 sentences. Lead with:
 
 ### Dashboard Table
 
-Present 3 scored metrics plus temporal info:
+Present 3 scored metrics with benchmark comparisons:
 
-| Metric | Value | Trend | Status |
-|--------|-------|-------|--------|
-| Commits/Day | {from git.velocity.commits_per_day} | -> | {apply threshold} |
-| Bus Factor | {from git.contributors.bus_factor} | -> | {apply threshold} |
-| Code Quality | {from quality.summary.overall_score}% | -> | {apply threshold} |
+| Metric | Value | Benchmark | Delta | Status |
+|--------|-------|-----------|-------|--------|
+| Commits/Day | {value} | 2.0 | {delta} ({pct}% {over/under}) | {status} |
+| Bus Factor | {value} | 3 | {delta} ({pct}% {over/under}) | {status} |
+| Code Quality | {value}% | 80% | {delta}pp ({pct}% {over/under}) | {status} |
 
-Trend indicators (up/down/stable) require comparison data. Use stable for first assessment.
+**Delta Calculation:**
+- Commits/Day: `delta = value - 2.0`, negative = under benchmark
+- Bus Factor: `delta = value - 3`, negative = under benchmark
+- Code Quality: `delta = value - 80`, negative = under benchmark (use "pp" for percentage points)
+
+**Delta Format Examples:**
+- Value 0.84, Benchmark 2.0 → Delta: -1.16 (58% under)
+- Value 1, Benchmark 3 → Delta: -2 (67% under)
+- Value 6.4%, Benchmark 80% → Delta: -73.6pp (92% under)
 
 **Temporal Patterns (informational only):**
 
@@ -71,10 +79,42 @@ Extract from `git.velocity`:
 ### Contributor Health
 
 Extract from `git.contributors`:
-- Contributor breakdown table
 - Bus factor assessment
 - Gini coefficient interpretation
 - Knowledge silo warnings if applicable
+
+### Contributor Breakdown
+
+Generate a detailed contributor analysis table from `git.contributors.breakdown`:
+
+| Contributor | Commits | % of Total | Cumulative % | Role Classification |
+|-------------|---------|------------|--------------|---------------------|
+| {name} | {commits} | {percentage}% | {running_total}% | {classification} |
+| ... | ... | ... | ... | ... |
+
+**Role Classification Rules:**
+- **Primary**: First contributor(s) reaching 50% cumulative (the "bus factor" contributors)
+- **Secondary**: Contributors between 50%-80% cumulative
+- **Peripheral**: Contributors beyond 80% cumulative
+
+**Contributor Analysis Requirements:**
+
+After the table, provide analysis covering:
+
+1. **Concentration Assessment**: Quantify how concentrated contributions are
+   - Example: "Top 2 contributors account for 87.2% of commits"
+
+2. **Knowledge Distribution**: Identify knowledge silos
+   - Example: "Sean Rezaie holds 69.7% of commit history, creating critical knowledge concentration"
+
+3. **Team Health Indicators**:
+   - Compare actual distribution to ideal (equal share would be 100/n% per contributor)
+   - Note contributors above/below expected contribution
+
+4. **Risk Callouts**: Flag specific contributor-related risks
+   - Single point of failure if bus factor = 1
+   - Burnout risk if one contributor >60% and others <10%
+   - Onboarding gaps if recent contributors have <5%
 
 ### Temporal Patterns (Informational)
 

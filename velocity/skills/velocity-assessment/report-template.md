@@ -19,12 +19,11 @@ Template for executive velocity assessment reports.
 
 ### Dashboard
 
-| Metric | Value | Trend | Status |
-|--------|-------|-------|--------|
-| Commits/Day | {value} | {up/down/stable} | {status} |
-| Bus Factor | {value} | {up/down/stable} | {status} |
-| Weekend Work | {value}% | {up/down/stable} | {status} |
-| Code Quality | {value}% | {up/down/stable} | {status} |
+| Metric | Value | Benchmark | Delta | Status |
+|--------|-------|-----------|-------|--------|
+| Commits/Day | {value} | 2.0 | {delta} ({pct}% {over/under}) | {status} |
+| Bus Factor | {value} | 3 | {delta} ({pct}% {over/under}) | {status} |
+| Code Quality | {value}% | 80% | {delta}pp ({pct}% {over/under}) | {status} |
 
 **Overall Risk Score:** {score}/100 ({risk_level})
 
@@ -49,13 +48,6 @@ Template for executive velocity assessment reports.
 
 ## Contributor Health
 
-### Team Composition
-
-| Contributor | Commits | % of Total | Primary Areas |
-|-------------|---------|------------|---------------|
-| {name} | {count} | {pct}% | {areas} |
-| ... | ... | ... | ... |
-
 ### Risk Indicators
 
 | Metric | Value | Threshold | Status |
@@ -63,6 +55,21 @@ Template for executive velocity assessment reports.
 | Bus Factor | {value} | >=3 | {status} |
 | Gini Coefficient | {value} | <0.3 | {status} |
 | File Ownership | {value}% | <30% | {status} |
+
+### Contributor Breakdown
+
+| Contributor | Commits | % of Total | Cumulative % | Role |
+|-------------|---------|------------|--------------|------|
+| {name} | {count} | {pct}% | {cumulative}% | {Primary/Secondary/Peripheral} |
+| ... | ... | ... | ... | ... |
+
+### Contributor Analysis
+
+{Analysis covering:}
+- Concentration assessment with specific percentages
+- Knowledge distribution and silo identification
+- Comparison to ideal distribution (100/n% per contributor)
+- Specific risk callouts (single point of failure, burnout indicators)
 
 ---
 

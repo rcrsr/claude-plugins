@@ -111,20 +111,36 @@ Present the final executive report to the user.
 
 ## Executive Summary
 
-| Metric | Value | Status |
-|--------|-------|--------|
-| Velocity | 2.3 commits/day | Healthy |
-| Bus Factor | 3 contributors | Warning |
-| Code Quality | 78% | Healthy |
+### Dashboard
+
+| Metric | Value | Benchmark | Delta | Status |
+|--------|-------|-----------|-------|--------|
+| Commits/Day | 2.3 | 2.0 | +0.3 (15% over) | 🟢 Healthy |
+| Bus Factor | 2 | 3 | -1 (33% under) | 🟡 Warning |
+| Code Quality | 78% | 80% | -2pp (3% under) | 🟡 Warning |
+
+## Contributor Breakdown
+
+| Contributor | Commits | % of Total | Cumulative % | Role |
+|-------------|---------|------------|--------------|------|
+| Alice | 95 | 45.9% | 45.9% | Primary |
+| Bob | 62 | 30.0% | 75.9% | Primary |
+| Carol | 30 | 14.5% | 90.4% | Secondary |
+| Dave | 15 | 7.2% | 97.6% | Peripheral |
+| Eve | 5 | 2.4% | 100.0% | Peripheral |
+
+### Contributor Analysis
+
+Top 2 contributors (Alice, Bob) account for 75.9% of commits. With a bus factor of 2, the project has emerging key-person risk. Ideal distribution for 5 contributors is 20% each. Alice exceeds ideal by 26 percentage points. Knowledge transfer to Carol recommended.
 
 ## Key Findings
 
-1. Consistent commit cadence with 2.3 commits/day average
-2. Three active contributors reduce key-person risk
+1. Commits/day at 2.3 exceeds benchmark by 15%
+2. Bus factor of 2 falls 33% below target of 3
 3. Error handling coverage at 85% exceeds threshold
 
 ## Recommendations
 
-1. Expand contributor base to improve bus factor
+1. Pair programming sessions between Alice and Carol
 2. Address complexity hotspots in parser module
 ```
