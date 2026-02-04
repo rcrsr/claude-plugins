@@ -67,6 +67,57 @@ Reference document for metric formulas, thresholds, and interpretation.
 | 30% - 60% | Warning | Emerging silos |
 | > 60% | Critical | Knowledge silos present |
 
+## Contributor Performance Rating
+
+Multi-dimensional scoring system for individual contributor assessment.
+
+### Dimension Scores
+
+Each contributor receives scores (0-100) across four dimensions:
+
+| Dimension | Weight | Formula | Rationale |
+|-----------|--------|---------|-----------|
+| Volume | 40% | `commits × log10(lines_changed + 1)` normalized | Rewards impactful work, log dampens LOC gaming |
+| Breadth | 20% | `files_touched / total_files_changed × 100` | Measures codebase familiarity |
+| Consistency | 20% | `active_weeks / period_weeks × 100` | Rewards sustained engagement |
+| Quality | 20% | From quality assessor (default: 50) | Code health contribution |
+
+### Lines Changed vs Net LOC
+
+The system uses **lines changed** (`additions + deletions`) rather than net LOC (`additions - deletions`):
+
+| Metric | Pros | Cons |
+|--------|------|------|
+| Lines Changed | Values deletions, measures effort | Can reward churn |
+| Net LOC | Measures growth | Penalizes cleanup work |
+
+Deletions represent valuable work (removing dead code, refactoring, simplification). Lines changed captures total effort without penalizing contributors who improve code health through removal.
+
+### Weighted Score Calculation
+
+```
+weighted_score = (volume × 0.40) + (breadth × 0.20) + (consistency × 0.20) + (quality × 0.20)
+```
+
+### Contributor Tiers
+
+Based on percentage of total team weighted score:
+
+| Tier | Score Share | Interpretation |
+|------|-------------|----------------|
+| Core | ≥25% | Primary contributors, high bus factor impact |
+| Regular | 10-24% | Consistent contributors, important for coverage |
+| Occasional | 3-9% | Part-time or focused contributors |
+| Drive-by | <3% | Minimal involvement, one-off fixes |
+
+### Tier Distribution Health
+
+| Pattern | Status | Interpretation |
+|---------|--------|----------------|
+| 2+ Core contributors | Healthy | Distributed ownership |
+| 1 Core, 2+ Regular | Warning | Emerging concentration |
+| 1 Core, few Regular | Critical | Key person dependency |
+
 ## Temporal Patterns (Informational Only)
 
 **Not included in risk scoring.** Remote contributors across time zones make commit timestamps unreliable as risk indicators. Report these metrics for visibility only.
@@ -133,6 +184,42 @@ Reference document for metric formulas, thresholds, and interpretation.
 | 0.3 - 0.5 | Warning | Moderate coverage |
 | < 0.3 | Critical | Insufficient testing |
 
+## Per-Contributor Quality Signals (Future)
+
+These metrics require additional git history analysis and are reserved for future implementation:
+
+### Revert Rate
+
+**Formula:** `commits_reverted_by_others / total_commits × 100`
+
+| Range | Interpretation |
+|-------|----------------|
+| < 2% | Normal, rare mistakes |
+| 2-5% | Elevated, review quality concern |
+| > 5% | High, process intervention needed |
+
+### Churn Rate
+
+**Formula:** `lines_modified_within_14_days / lines_authored × 100`
+
+Measures how often a contributor's code requires immediate follow-up changes.
+
+| Range | Interpretation |
+|-------|----------------|
+| < 15% | Stable code |
+| 15-30% | Normal iteration |
+| > 30% | High churn, design concern |
+
+### Test Association Rate
+
+**Formula:** `commits_touching_test_files / total_commits × 100`
+
+| Range | Interpretation |
+|-------|----------------|
+| > 40% | Strong testing discipline |
+| 20-40% | Moderate testing |
+| < 20% | Testing gaps likely |
+
 ## DORA Metric Alignment
 
 This assessment aligns with DORA (DevOps Research and Assessment) metrics:
@@ -169,6 +256,9 @@ This assessment aligns with DORA (DevOps Research and Assessment) metrics:
 | Metric Category | Data Source | Tool |
 |-----------------|-------------|------|
 | Velocity | Git log | Bash (git commands) |
-| Contributors | Git shortlog | Bash (git commands) |
+| Contributors | Git shortlog, git log --numstat | Bash (git commands) |
+| Contributor LOC | Git log --numstat per author | Bash (git commands) |
+| Files Touched | Git log --name-only per author | Bash (git commands) |
+| Active Weeks | Git log --date=format per author | Bash (git commands) |
 | Temporal | Git log timestamps | Bash (git commands) |
 | Quality | Symbol analysis | Codanna CLI |

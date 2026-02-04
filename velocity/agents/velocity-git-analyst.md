@@ -29,8 +29,24 @@ Return a JSON object with three sections:
     "total_count": 0,
     "bus_factor": 0,
     "gini_coefficient": 0.0,
+    "active_weeks": 0,
     "breakdown": [
-      {"name": "...", "commits": 0, "percentage": 0.0}
+      {
+        "name": "...",
+        "commits": 0,
+        "lines_added": 0,
+        "lines_deleted": 0,
+        "lines_changed": 0,
+        "files_touched": 0,
+        "active_weeks": 0,
+        "pct_commits": 0.0,
+        "pct_lines": 0.0,
+        "volume_score": 0.0,
+        "breadth_score": 0.0,
+        "consistency_score": 0.0,
+        "weighted_score": 0.0,
+        "tier": "Core|Regular|Occasional|Drive-by"
+      }
     ]
   },
   "patterns": {
@@ -63,6 +79,20 @@ git log --shortstat --since="{start_date}" --until="{end_date}" | grep -E "fil(e
 ```bash
 # Author commit distribution (for Gini calculation)
 git shortlog -sn --since="{start_date}" --until="{end_date}" --no-merges
+
+# Per-contributor lines added/deleted
+git log --since="{start_date}" --until="{end_date}" --format='%an' --numstat --no-merges | \
+  awk '/^[a-zA-Z]/ {author=$0} /^[0-9]/ {added[author]+=$1; deleted[author]+=$2} \
+  END {for (a in added) print a "|" added[a] "|" deleted[a]}'
+
+# Per-contributor files touched (distinct count)
+git log --since="{start_date}" --until="{end_date}" --format='%an' --name-only --no-merges | \
+  awk '/^[a-zA-Z]/ {author=$0; next} NF {files[author][$0]=1} \
+  END {for (a in files) {count=0; for (f in files[a]) count++; print a "|" count}}'
+
+# Per-contributor active weeks
+git log --since="{start_date}" --until="{end_date}" --format='%an|%ad' --date=format:'%Y-%W' --no-merges | \
+  sort -u | awk -F'|' '{weeks[$1]++} END {for (a in weeks) print a "|" weeks[a]}'
 
 # File ownership (who changed each file most)
 git log --since="{start_date}" --until="{end_date}" --format='%an' --name-only | sort | uniq -c | sort -rn
@@ -120,6 +150,53 @@ def gini(values):
     cumulative = sum((i + 1) * v for i, v in enumerate(sorted_vals))
     total = sum(sorted_vals)
     return (2 * cumulative) / (n * total) - (n + 1) / n
+```
+
+### Contributor Performance Scores
+
+Each contributor receives dimension scores normalized to 0-100:
+
+```python
+# Volume Score (40% weight)
+# Combines commits and lines changed
+contributor_volume = commits * log10(lines_changed + 1)
+volume_score = (contributor_volume / max_volume) * 100
+
+# Breadth Score (20% weight)
+# Files touched relative to total files changed
+breadth_score = (files_touched / total_files_changed) * 100
+
+# Consistency Score (20% weight)
+# Active weeks relative to period length
+consistency_score = (active_weeks / total_weeks_in_period) * 100
+
+# Quality Score (20% weight)
+# Passed from quality assessor, default 50 if unavailable
+quality_score = quality_assessor_score or 50
+
+# Weighted Score
+weighted_score = (
+    volume_score * 0.40 +
+    breadth_score * 0.20 +
+    consistency_score * 0.20 +
+    quality_score * 0.20
+)
+```
+
+### Contributor Tier Assignment
+
+Based on percentage of total weighted score across all contributors:
+
+```python
+def assign_tier(contributor_pct):
+    if contributor_pct >= 25:
+        return "Core"
+    elif contributor_pct >= 10:
+        return "Regular"
+    elif contributor_pct >= 3:
+        return "Occasional"
+    else:
+        return "Drive-by"
 ```
 
 ### After-Hours Percentage
@@ -198,12 +275,89 @@ COMMITS_PER_DAY=$(echo "scale=2; $TOTAL / $DAYS" | bc)
     "total_count": 5,
     "bus_factor": 3,
     "gini_coefficient": 0.35,
+    "active_weeks": 13,
+    "total_files_changed": 142,
     "breakdown": [
-      {"name": "alice", "commits": 95, "percentage": 45.9},
-      {"name": "bob", "commits": 62, "percentage": 30.0},
-      {"name": "carol", "commits": 30, "percentage": 14.5},
-      {"name": "dave", "commits": 15, "percentage": 7.2},
-      {"name": "eve", "commits": 5, "percentage": 2.4}
+      {
+        "name": "alice",
+        "commits": 95,
+        "lines_added": 6200,
+        "lines_deleted": 2100,
+        "lines_changed": 8300,
+        "files_touched": 78,
+        "active_weeks": 12,
+        "pct_commits": 45.9,
+        "pct_lines": 47.0,
+        "volume_score": 85.2,
+        "breadth_score": 54.9,
+        "consistency_score": 92.3,
+        "weighted_score": 72.1,
+        "tier": "Core"
+      },
+      {
+        "name": "bob",
+        "commits": 62,
+        "lines_added": 4100,
+        "lines_deleted": 1800,
+        "lines_changed": 5900,
+        "files_touched": 45,
+        "active_weeks": 10,
+        "pct_commits": 30.0,
+        "pct_lines": 33.4,
+        "volume_score": 62.4,
+        "breadth_score": 31.7,
+        "consistency_score": 76.9,
+        "weighted_score": 53.8,
+        "tier": "Core"
+      },
+      {
+        "name": "carol",
+        "commits": 30,
+        "lines_added": 1500,
+        "lines_deleted": 600,
+        "lines_changed": 2100,
+        "files_touched": 22,
+        "active_weeks": 8,
+        "pct_commits": 14.5,
+        "pct_lines": 11.9,
+        "volume_score": 28.1,
+        "breadth_score": 15.5,
+        "consistency_score": 61.5,
+        "weighted_score": 31.2,
+        "tier": "Regular"
+      },
+      {
+        "name": "dave",
+        "commits": 15,
+        "lines_added": 550,
+        "lines_deleted": 280,
+        "lines_changed": 830,
+        "files_touched": 12,
+        "active_weeks": 4,
+        "pct_commits": 7.2,
+        "pct_lines": 4.7,
+        "volume_score": 11.2,
+        "breadth_score": 8.5,
+        "consistency_score": 30.8,
+        "weighted_score": 15.1,
+        "tier": "Regular"
+      },
+      {
+        "name": "eve",
+        "commits": 5,
+        "lines_added": 100,
+        "lines_deleted": 50,
+        "lines_changed": 150,
+        "files_touched": 5,
+        "active_weeks": 2,
+        "pct_commits": 2.4,
+        "pct_lines": 0.8,
+        "volume_score": 2.8,
+        "breadth_score": 3.5,
+        "consistency_score": 15.4,
+        "weighted_score": 5.4,
+        "tier": "Drive-by"
+      }
     ]
   },
   "patterns": {

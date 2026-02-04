@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.2.0] - 2026-02-03
+
+### Added
+
+- Per-contributor LOC tracking (lines added, lines deleted, lines changed)
+- Per-contributor files touched metric for breadth measurement
+- Per-contributor active weeks metric for consistency measurement
+- Multi-dimensional weighted scoring system (volume 40%, breadth 20%, consistency 20%, quality 20%)
+- Contributor tier classification: Core (≥25%), Regular (10-24%), Occasional (3-9%), Drive-by (<3%)
+- Dimension scores table showing breakdown per contributor
+- Tier distribution summary table
+- Future quality signals section (revert rate, churn rate, test association rate)
+
+### Changed
+
+- Contributor breakdown table now shows lines changed, files touched, active weeks, weighted score, and tier
+- Replaced Primary/Secondary/Peripheral role classification with tier system based on weighted score share
+- Enhanced contributor analysis with tier health assessment and volume/breadth profile analysis
+- Updated git analyst with new per-author git commands for LOC and files
+
+### Rationale
+
+- Commits alone fail to capture contribution impact (1-line fix = 1 commit, 5000-line feature = 1 commit)
+- Lines changed (additions + deletions) values deletion work (cleanup, refactoring)
+- Multi-dimensional scoring prevents gaming any single metric
+- Tiers based on weighted score share provide relative benchmarking within teams
+
 ## [1.1.0] - 2026-02-03
 
 ### Added

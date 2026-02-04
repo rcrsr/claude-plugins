@@ -87,34 +87,63 @@ Extract from `git.contributors`:
 
 Generate a detailed contributor analysis table from `git.contributors.breakdown`:
 
-| Contributor | Commits | % of Total | Cumulative % | Role Classification |
-|-------------|---------|------------|--------------|---------------------|
-| {name} | {commits} | {percentage}% | {running_total}% | {classification} |
-| ... | ... | ... | ... | ... |
+| Contributor | Commits | Lines Changed | Files | Active Wks | Weighted Score | Tier |
+|-------------|---------|---------------|-------|------------|----------------|------|
+| {name} | {commits} | {lines_changed} | {files_touched} | {active_weeks} | {weighted_score} | {tier} |
+| ... | ... | ... | ... | ... | ... | ... |
 
-**Role Classification Rules:**
-- **Primary**: First contributor(s) reaching 50% cumulative (the "bus factor" contributors)
-- **Secondary**: Contributors between 50%-80% cumulative
-- **Peripheral**: Contributors beyond 80% cumulative
+### Dimension Scores Table
+
+Show the scoring breakdown for each contributor:
+
+| Contributor | Volume (40%) | Breadth (20%) | Consistency (20%) | Quality (20%) | Total |
+|-------------|--------------|---------------|-------------------|---------------|-------|
+| {name} | {volume_score} | {breadth_score} | {consistency_score} | {quality_score} | {weighted_score} |
+| ... | ... | ... | ... | ... | ... |
+
+### Tier Distribution Summary
+
+| Tier | Count | Contributors | Score Share |
+|------|-------|--------------|-------------|
+| Core (≥25%) | {count} | {names} | {pct}% |
+| Regular (10-24%) | {count} | {names} | {pct}% |
+| Occasional (3-9%) | {count} | {names} | {pct}% |
+| Drive-by (<3%) | {count} | {names} | {pct}% |
+
+**Tier Classification Rules:**
+- **Core**: ≥25% of total weighted score - primary contributors with high bus factor impact
+- **Regular**: 10-24% of total weighted score - consistent contributors important for coverage
+- **Occasional**: 3-9% of total weighted score - part-time or focused contributors
+- **Drive-by**: <3% of total weighted score - minimal involvement, one-off fixes
 
 **Contributor Analysis Requirements:**
 
-After the table, provide analysis covering:
+After the tables, provide analysis covering:
 
-1. **Concentration Assessment**: Quantify how concentrated contributions are
-   - Example: "Top 2 contributors account for 87.2% of commits"
+1. **Tier Distribution Health**: Assess contributor sustainability
+   - 2+ Core contributors = Healthy (distributed ownership)
+   - 1 Core, 2+ Regular = Warning (emerging concentration)
+   - 1 Core, few Regular = Critical (key person dependency)
 
-2. **Knowledge Distribution**: Identify knowledge silos
-   - Example: "Sean Rezaie holds 69.7% of commit history, creating critical knowledge concentration"
+2. **Volume vs Breadth Analysis**: Identify contributor profiles
+   - High volume, high breadth = Generalist (broad codebase familiarity)
+   - High volume, low breadth = Specialist (deep domain focus)
+   - Low volume, high breadth = Reviewer/coordinator pattern
 
-3. **Team Health Indicators**:
-   - Compare actual distribution to ideal (equal share would be 100/n% per contributor)
-   - Note contributors above/below expected contribution
+3. **Consistency Patterns**: Flag engagement concerns
+   - High consistency (>80%) = Sustained engagement
+   - Burst pattern (<40% active weeks with high volume) = Deadline-driven
+   - Low consistency, low volume = Potential disengagement
 
-4. **Risk Callouts**: Flag specific contributor-related risks
-   - Single point of failure if bus factor = 1
-   - Burnout risk if one contributor >60% and others <10%
-   - Onboarding gaps if recent contributors have <5%
+4. **Commits vs LOC Divergence**: Identify unusual patterns
+   - High commits, low LOC = Documentation/config work or micro-commits
+   - Low commits, high LOC = Large feature work or bulk changes
+
+5. **Risk Callouts**: Flag specific contributor-related risks
+   - Single Core contributor = Critical key-person dependency
+   - Core contributor burnout risk if >70% of total weighted score
+   - No Regular tier contributors = Succession gap
+   - Drive-by contributors >50% of team = Transient workforce concern
 
 ### Temporal Patterns (Informational)
 

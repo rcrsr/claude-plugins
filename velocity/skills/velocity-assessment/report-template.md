@@ -58,17 +58,34 @@ Template for executive velocity assessment reports.
 
 ### Contributor Breakdown
 
-| Contributor | Commits | % of Total | Cumulative % | Role |
-|-------------|---------|------------|--------------|------|
-| {name} | {count} | {pct}% | {cumulative}% | {Primary/Secondary/Peripheral} |
-| ... | ... | ... | ... | ... |
+| Contributor | Commits | Lines Changed | Files | Active Wks | Weighted Score | Tier |
+|-------------|---------|---------------|-------|------------|----------------|------|
+| {name} | {count} | {lines} | {files} | {weeks} | {score} | {Core/Regular/Occasional/Drive-by} |
+| ... | ... | ... | ... | ... | ... | ... |
+
+### Dimension Scores
+
+| Contributor | Volume (40%) | Breadth (20%) | Consistency (20%) | Quality (20%) | Total |
+|-------------|--------------|---------------|-------------------|---------------|-------|
+| {name} | {volume_score} | {breadth_score} | {consistency_score} | {quality_score} | {weighted_score} |
+| ... | ... | ... | ... | ... | ... |
+
+### Tier Distribution
+
+| Tier | Count | Contributors | % of Team |
+|------|-------|--------------|-----------|
+| Core | {count} | {names} | {pct}% |
+| Regular | {count} | {names} | {pct}% |
+| Occasional | {count} | {names} | {pct}% |
+| Drive-by | {count} | {names} | {pct}% |
 
 ### Contributor Analysis
 
 {Analysis covering:}
-- Concentration assessment with specific percentages
+- Tier distribution health (2+ Core = healthy, 1 Core = risk)
+- Volume vs breadth balance (specialists vs generalists)
+- Consistency patterns (sustained vs burst contributors)
 - Knowledge distribution and silo identification
-- Comparison to ideal distribution (100/n% per contributor)
 - Specific risk callouts (single point of failure, burnout indicators)
 
 ---
