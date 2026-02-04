@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.3.0] - 2026-02-03
+
+### Added
+
+- Team Velocity Grade (A-F) based on commits/developer/day with industry benchmarks
+- Team Health Grade (A-F) composite score from velocity, bus factor, test coverage, error handling
+- Individual Performance Rating per contributor (Exceeds/Meets+/Meets/Needs Improvement/Unsatisfactory)
+- Performance Index calculation: actual contribution % vs expected share (100%/team_size)
+- Individual performance cards with dimension breakdown, strengths, and development areas
+- Adjustment factor guidance for new hires, part-time allocation, non-coding roles
+
+### Changed
+
+- Executive summary now includes Team Performance Summary table with grades
+- Report template includes Individual Performance Ratings section
+- Metrics definitions reorganized with Team and Individual sections at top
+
+### Rationale
+
+- Non-technical owners need clear grades for performance management
+- Team velocity normalized by team size enables cross-team comparison
+- Expected share baseline (100%/n) provides fair individual assessment
+- Grade scale aligns with standard HR performance review terminology
+
 ## [1.2.0] - 2026-02-03
 
 ### Added

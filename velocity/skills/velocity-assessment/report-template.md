@@ -17,6 +17,13 @@ Template for executive velocity assessment reports.
 
 {2-3 sentence overview of velocity health and key findings}
 
+### Team Performance Summary
+
+| Rating | Grade | Score |
+|--------|-------|-------|
+| Team Velocity | {A-F} | {commits/dev/day} commits/dev/day |
+| Team Health | {A-F} | {0-100}/100 |
+
 ### Dashboard
 
 | Metric | Value | Benchmark | Delta | Status |
@@ -87,6 +94,49 @@ Template for executive velocity assessment reports.
 - Consistency patterns (sustained vs burst contributors)
 - Knowledge distribution and silo identification
 - Specific risk callouts (single point of failure, burnout indicators)
+
+---
+
+## Individual Performance Ratings
+
+Performance grades relative to expected contribution (100% / active_contributors).
+
+### Performance Summary
+
+| Contributor | Performance Index | Grade | Trend |
+|-------------|------------------|-------|-------|
+| {name} | {index}% | {Exceeds/Meets+/Meets/Needs Improvement/Unsatisfactory} | {↑/→/↓} |
+| ... | ... | ... | ... |
+
+**Team Size:** {active_contributors} active contributors
+**Expected Share:** {expected_share}% per contributor
+
+### Individual Performance Cards
+
+<details>
+<summary>{Contributor Name} - {Grade}</summary>
+
+**Performance Index:** {index}% of expected ({actual_pct}% actual / {expected_pct}% expected)
+
+| Metric | Value | % of Team | vs Expected |
+|--------|-------|-----------|-------------|
+| Commits | {count} | {pct}% | {above/below} |
+| Lines Changed | {lines} | {pct}% | {above/below} |
+| Files Touched | {files} | {pct}% | {above/below} |
+| Active Weeks | {weeks}/{total} | {pct}% | {above/below} |
+
+**Dimension Scores:**
+- Volume: {score}/100
+- Breadth: {score}/100
+- Consistency: {score}/100
+- Quality: {score}/100
+
+**Strengths:** {highest dimension}
+**Development Areas:** {lowest dimension}
+
+</details>
+
+{Repeat for each contributor}
 
 ---
 

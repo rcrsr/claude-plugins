@@ -39,6 +39,47 @@ Synthesize the most critical finding in 2-3 sentences. Lead with:
 - Primary concern or strength
 - Single most impactful recommendation
 
+### Team Performance Summary
+
+Calculate and display two key ratings:
+
+**Team Velocity Grade (A-F):**
+
+Based on commits per developer per day:
+
+| Grade | Threshold | Calculation |
+|-------|-----------|-------------|
+| A | ≥0.8 | commits_per_day / active_contributors ≥ 0.8 |
+| B | 0.5-0.79 | commits_per_day / active_contributors |
+| C | 0.3-0.49 | commits_per_day / active_contributors |
+| D | 0.15-0.29 | commits_per_day / active_contributors |
+| F | <0.15 | commits_per_day / active_contributors |
+
+**Team Health Grade (A-F):**
+
+Composite score from four components (25% each):
+
+| Component | Healthy (25pts) | Warning (12pts) | Critical (0pts) |
+|-----------|-----------------|-----------------|-----------------|
+| Velocity | ≥0.5/dev/day | 0.3-0.49 | <0.3 |
+| Bus Factor | ≥3 | 2 | 1 |
+| Test Coverage | ≥60% | 30-59% | <30% |
+| Error Handling | ≥80% | 60-79% | <60% |
+
+Health score interpretation:
+- A: 85-100
+- B: 70-84
+- C: 55-69
+- D: 40-54
+- F: <40
+
+**Format:**
+
+| Rating | Grade | Score |
+|--------|-------|-------|
+| Team Velocity | {grade} | {value} commits/dev/day |
+| Team Health | {grade} | {score}/100 |
+
 ### Dashboard Table
 
 Present 3 scored metrics with benchmark comparisons:
@@ -144,6 +185,54 @@ After the tables, provide analysis covering:
    - Core contributor burnout risk if >70% of total weighted score
    - No Regular tier contributors = Succession gap
    - Drive-by contributors >50% of team = Transient workforce concern
+
+### Individual Performance Ratings
+
+Generate performance grades for each contributor relative to expected contribution.
+
+**Expected Share Calculation:**
+
+```
+expected_share = 100% / active_contributors
+```
+
+Where active_contributors = contributors with ≥3 commits in period (excludes drive-by).
+
+**Performance Index Calculation:**
+
+```
+performance_index = (contributor_weighted_score_pct / expected_share) × 100
+```
+
+**Performance Grade Assignment:**
+
+| Grade | Performance Index | Meaning |
+|-------|------------------|---------|
+| Exceeds Expectations | ≥150% | Significantly above expected output |
+| Meets Expectations+ | 120-149% | Above expected output |
+| Meets Expectations | 80-119% | Within normal range |
+| Needs Improvement | 50-79% | Below expected output |
+| Unsatisfactory | <50% | Significantly below expected output |
+
+**Output Format:**
+
+Summary table:
+
+| Contributor | Performance Index | Grade |
+|-------------|------------------|-------|
+| {name} | {index}% | {grade} |
+
+Individual cards (in collapsible details) showing:
+- Performance index breakdown
+- All four dimension scores
+- Identified strengths (highest dimension)
+- Development areas (lowest dimension)
+
+**Adjustment Notes:**
+
+If contributor has adjustment factors, note them:
+- New hire: "Joined {date}, in ramp-up period"
+- Part-time: "Allocated {X}% to this project"
 
 ### Temporal Patterns (Informational)
 
