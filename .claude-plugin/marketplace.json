@@ -32,6 +32,14 @@
       "name": "velocity",
       "source": "./velocity",
       "description": "Velocity and quality assessment for development teams"
-    }
+    },
+    {
+      "name": "rill-make",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/rcrsr/rill-make.git"
+      }, 
+      "description": "Create rill packages with a single prompt"
+    } 
   ]
 }
